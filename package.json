@@ -1,0 +1,20 @@
+{
+  "name": "kelurahan-wordpress-template",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Template WordPress profil kelurahan berbasis Permendagri 12/2007, dirancang untuk dikembangkan oleh AI coding agent.",
+  "scripts": {
+    "setup": "php bin/setup.php --seed",
+    "start": "php bin/serve.php",
+    "wp": "php tools/wp-cli.phar",
+    "make": "php bin/make.php",
+    "rename": "php bin/rename.php",
+    "check": "php bin/check.php",
+    "check:wp": "php bin/check.php --wp",
+    "check:http": "php bin/check.php --http",
+    "check:all": "php bin/check.php --http --phpcs",
+    "seed": "php tools/wp-cli.phar eval-file bin/seed.php",
+    "env:start": "npx @wordpress/env start",
+    "env:stop": "npx @wordpress/env stop"
+  }
+}

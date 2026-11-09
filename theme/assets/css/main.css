@@ -1,0 +1,62 @@
+/*
+ * Custom CSS. Design tokens (colors, fonts, spacing) belong in theme.json —
+ * reference them here as var(--wp--preset--<type>--<slug>).
+ * Also loaded in the editor via add_editor_style().
+ */
+
+/* Skip link (PHP templates; block templates get one from core). */
+.skip-link.screen-reader-text:focus {
+	position: absolute;
+	top: 0.5rem;
+	left: 0.5rem;
+	z-index: 100000;
+	padding: 0.75rem 1rem;
+	background: var(--wp--preset--color--base);
+	color: var(--wp--preset--color--contrast);
+	clip: auto;
+	clip-path: none;
+	width: auto;
+	height: auto;
+}
+
+/* Card grid used by PHP templates (template-parts/content-card.php). */
+.kelurahan-card-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: var(--wp--preset--spacing--30);
+}
+
+.kelurahan-card {
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 8px;
+	overflow: hidden;
+	background: var(--wp--preset--color--base);
+}
+
+.kelurahan-card__media img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+}
+
+.kelurahan-card__body {
+	padding: var(--wp--preset--spacing--20);
+}
+
+.kelurahan-card__title {
+	margin: 0 0 0.25rem;
+	font-size: var(--wp--preset--font-size--large);
+}
+
+.kelurahan-card__title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.kelurahan-card__meta {
+	margin: 0 0 0.5rem;
+	color: var(--wp--preset--color--contrast-2);
+	font-size: var(--wp--preset--font-size--small);
+}

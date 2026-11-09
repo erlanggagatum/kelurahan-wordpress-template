@@ -1,0 +1,14 @@
+# Local WordPress install (core, wp-config.php, uploads, debug.log)
+/.wp/
+# Tools & deps
+/tools/
+/vendor/
+/node_modules/
+# Secrets (also holds PRIVACY_DENYLIST)
+.env
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

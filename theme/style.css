@@ -1,0 +1,19 @@
+/*
+Theme Name:        Profil Kelurahan
+Theme URI:         https://example.com/kelurahan
+Author:            Profil Kelurahan Contributors
+Description:       Hybrid (block + PHP) starter theme designed to be extended by AI coding agents. Config-driven post types, taxonomies and meta; block templates with PHP fallbacks.
+Version:           0.1.0
+Requires at least: 6.6
+Tested up to:      6.8
+Requires PHP:      8.1
+License:           GPL-2.0-or-later
+License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:       kelurahan
+Tags:              full-site-editing, block-patterns, custom-colors, editor-style
+*/
+
+/*
+ * Do not put styles here. Use theme.json for design tokens and
+ * assets/css/main.css for custom CSS. This file only holds the theme header.
+ */

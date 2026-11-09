@@ -1,0 +1,8 @@
+#!/bin/sh
+# Blocks commits that leak absolute paths, real emails, secrets or denylisted
+# terms (PRIVACY_DENYLIST in .env). Enabled by: git config core.hooksPath .githooks
+# (bin/setup.php does this automatically).
+php bin/privacy-check.php || {
+	echo "pre-commit: privacy check failed. Fix the files above, then commit again." >&2
+	exit 1
+}
