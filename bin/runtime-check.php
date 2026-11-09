@@ -109,9 +109,10 @@ if ( $kelurahan_errors ) {
 }
 WP_CLI::success(
 	sprintf(
-		'Runtime OK: theme %s, %d CPT(s), %d block(s).',
+		'Runtime OK: theme %s, %d CPT(s), %d block(s), %d module ID(s) enabled (sub-modules included).',
 		get_template(),
 		count( kelurahan_load_configs( 'post-types' ) ),
-		count( glob( KELURAHAN_DIR . '/blocks/*/block.json' ) ?: array() )
+		count( glob( KELURAHAN_DIR . '/blocks/*/block.json' ) ?: array() ),
+		count( kelurahan_enabled_modules() )
 	)
 );

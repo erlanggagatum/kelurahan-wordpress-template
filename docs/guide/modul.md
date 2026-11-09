@@ -8,8 +8,8 @@ Modul terbagi dua:
   kelurahan, seperti berita, layanan, dan PPID.
 
 ID, status bawaan, dan dependensi setiap modul juga tercatat di
-[`theme/config/modules.php`](../../theme/config/modules.php). Tema belum membaca berkas itu; untuk saat ini
-fungsinya sebagai spesifikasi. Setiap kali modul ditambah atau diubah, perbarui dokumen ini, `modules.php`,
+[`theme/config/modules.php`](../../theme/config/modules.php). Tema membaca berkas itu: bagian situs yang
+ditandai dengan ID modul tidak ditampilkan bila modulnya nonaktif. Menu dan halaman belum mengikuti modul. Setiap kali modul ditambah atau diubah, perbarui dokumen ini, `modules.php`,
 dan [struktur-situs.md](struktur-situs.md) sekaligus.
 
 ## Cara membaca katalog

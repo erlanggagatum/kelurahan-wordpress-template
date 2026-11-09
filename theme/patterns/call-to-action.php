@@ -4,15 +4,15 @@
  * Slug: kelurahan/call-to-action
  * Categories: kelurahan-sections, call-to-action
  * Keywords: cta, button, layanan
- * Description: Centered heading, short text and a button to the services page.
+ * Description: Centered heading, short text and a button to the services page. Hidden when module layanan is off.
  *
  * @package ProfilKelurahan
  */
 
 defined( 'ABSPATH' ) || exit;
 ?>
-<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}},"border":{"radius":"12px"}},"backgroundColor":"accent","textColor":"base","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignwide has-base-color has-accent-background-color has-text-color has-background" style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)">
+<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}},"border":{"radius":"12px"}},"backgroundColor":"accent","textColor":"base","className":"kelurahan-module-layanan","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignwide kelurahan-module-layanan has-base-color has-accent-background-color has-text-color has-background" style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)">
 	<!-- wp:heading {"textAlign":"center"} -->
 	<h2 class="wp-block-heading has-text-align-center"><?php echo esc_html__( 'Butuh layanan administrasi?', 'kelurahan' ); ?></h2>
 	<!-- /wp:heading -->
@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
 	<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 	<div class="wp-block-buttons">
 		<!-- wp:button {"backgroundColor":"base","textColor":"contrast"} -->
-		<div class="wp-block-button"><a class="wp-block-button__link has-contrast-color has-base-background-color has-text-color has-background wp-element-button" href="<?php echo esc_url( home_url( '/layanan/' ) ); ?>"><?php echo esc_html__( 'Lihat layanan', 'kelurahan' ); ?></a></div>
+		<div class="wp-block-button"><a class="wp-block-button__link has-contrast-color has-base-background-color has-text-color has-background wp-element-button" href="<?php echo esc_url( kelurahan_module_url( 'layanan' ) ); ?>"><?php echo esc_html__( 'Lihat layanan', 'kelurahan' ); ?></a></div>
 		<!-- /wp:button -->
 	</div>
 	<!-- /wp:buttons -->

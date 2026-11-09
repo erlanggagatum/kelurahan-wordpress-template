@@ -19,6 +19,7 @@ define( 'KELURAHAN_URI', get_template_directory_uri() );
  */
 $kelurahan_includes = array(
 	'inc/helpers.php',      // Generic helpers (config loader, label builder).
+	'inc/modules.php',      // Module switches from config/modules.php.
 	'inc/setup.php',        // Theme supports, menus, image sizes.
 	'inc/assets.php',       // Front-end and editor assets.
 	'inc/post-types.php',   // Registers config/post-types/*.php.

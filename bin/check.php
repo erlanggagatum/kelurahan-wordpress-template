@@ -204,6 +204,88 @@ foreach ( glob( THEME_DIR . '/templates/*.html' ) ?: array() as $file ) {
 }
 ok( 'Config: ' . count( $post_types ) . ' post types, ' . count( $seen_keys ) . ' meta fields' );
 
+// 4b. Modules (config/modules.php) and module IDs used in the theme ----------
+$modules_file = THEME_DIR . '/config/modules.php';
+$module_ids   = array();
+if ( is_file( $modules_file ) ) {
+	$modules = require $modules_file;
+	$f       = rel( $modules_file );
+	if ( ! is_array( $modules ) ) {
+		err( "{$f}: must return an array" );
+		$modules = array();
+	}
+	$id_re       = '/^[a-z0-9]+(-[a-z0-9]+)*$/';
+	$paths       = array();
+	$check_entry = static function ( string $id, $m, bool $top ) use ( $f, &$paths ): void {
+		if ( ! is_array( $m ) || ! is_string( $m['label'] ?? null ) || '' === $m['label'] || ! is_bool( $m['enabled'] ?? null ) ) {
+			err( "{$f}: module '{$id}' needs a non-empty 'label' and a bool 'enabled'" );
+			return;
+		}
+		if ( $top && ! in_array( $m['group'] ?? null, array( 'inti', 'pendukung' ), true ) ) {
+			err( "{$f}: module '{$id}' needs 'group' => 'inti' or 'pendukung'" );
+		}
+		if ( isset( $m['path'] ) ) {
+			if ( ! is_string( $m['path'] ) || ! preg_match( '#^/([a-z0-9-]+/)*$#', $m['path'] ) ) {
+				err( "{$f}: module '{$id}' path must look like '/a/b/' (lowercase, leading and trailing slash)" );
+			} elseif ( isset( $paths[ $m['path'] ] ) ) {
+				err( "{$f}: module '{$id}' path {$m['path']} is already used by '{$paths[ $m['path'] ]}'" );
+			} else {
+				$paths[ $m['path'] ] = $id;
+			}
+		}
+	};
+	foreach ( $modules as $id => $m ) {
+		if ( ! is_string( $id ) || ! preg_match( $id_re, $id ) ) {
+			err( "{$f}: module ID '{$id}' must be kebab-case [a-z0-9-]" );
+			continue;
+		}
+		$module_ids[] = $id;
+		$check_entry( $id, $m, true );
+		if ( ! empty( $m['required'] ) && empty( $m['enabled'] ) ) {
+			err( "{$f}: module '{$id}' is required and cannot be disabled" );
+		}
+		foreach ( (array) ( $m['children'] ?? array() ) as $child => $c ) {
+			if ( ! is_string( $child ) || ! preg_match( $id_re, $child ) ) {
+				err( "{$f}: sub-module ID '{$id}.{$child}' must be kebab-case [a-z0-9-]" );
+				continue;
+			}
+			$module_ids[] = "{$id}.{$child}";
+			$check_entry( "{$id}.{$child}", $c, false );
+		}
+	}
+	foreach ( $modules as $id => $m ) {
+		foreach ( (array) ( $m['requires'] ?? array() ) as $dep ) {
+			if ( $dep === $id || ! in_array( $dep, $module_ids, true ) ) {
+				err( "{$f}: module '{$id}' requires unknown or self module '{$dep}'" );
+			}
+		}
+	}
+
+	// Every module ID referenced in theme code/markup must exist.
+	$scan = array_merge( files( THEME_DIR, 'php' ), files( THEME_DIR, 'html' ) );
+	foreach ( $scan as $file ) {
+		if ( in_array( rel( $file ), array( 'theme/config/modules.php', 'theme/inc/modules.php' ), true ) ) {
+			continue; // The declaration itself and the engine (docblock examples).
+		}
+		$src  = (string) file_get_contents( $file );
+		$used = array();
+		if ( preg_match_all( "/kelurahan_module(?:_enabled|_url)?\(\s*['\"]([a-z0-9.-]+)['\"]/", $src, $mm ) ) {
+			$used = $mm[1];
+		}
+		if ( preg_match_all( '/(?<![\w-])kelurahan-module-([a-z0-9]+(?:-[a-z0-9]+|--[a-z0-9]+)*)/', $src, $mm ) ) {
+			foreach ( $mm[1] as $slug ) {
+				$used[] = str_replace( '--', '.', $slug );
+			}
+		}
+		foreach ( array_unique( $used ) as $used_id ) {
+			if ( ! in_array( $used_id, $module_ids, true ) ) {
+				err( rel( $file ) . ": unknown module ID '{$used_id}' (not in config/modules.php)" );
+			}
+		}
+	}
+}
+ok( 'Modules: ' . count( $module_ids ) . ' IDs' );
+
 // 5. Patterns & page templates headers ---------------------------------------
 foreach ( glob( THEME_DIR . '/patterns/*.php' ) ?: array() as $file ) {
 	$head = (string) file_get_contents( $file, false, null, 0, 2048 );

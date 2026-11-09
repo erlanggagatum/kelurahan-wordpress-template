@@ -2,8 +2,9 @@
 /**
  * Kelurahan site modules: which features this site includes.
  *
- * DECLARATION ONLY. The theme does not read this file yet. It is the machine-readable twin of
- * docs/guide/modul.md (catalog) and docs/guide/struktur-situs.md (sitemap). Keep all three in sync.
+ * Read by theme/inc/modules.php: kelurahan_module_enabled( 'sda.air' ), kelurahan_module_url( 'layanan' ),
+ * and the block class "kelurahan-module-<id>". Machine-readable twin of docs/guide/modul.md (catalog) and
+ * docs/guide/struktur-situs.md (sitemap). Keep all three in sync. `php bin/check.php` validates the shape.
  *
  * Shape:
  *   '<id>' => array(
@@ -11,10 +12,11 @@
  *       'group'    => 'inti' | 'pendukung',   inti = from Permendagri 12/2007, pendukung = not from it.
  *       'source'   => string,                 Article reference, or '' for pendukung.
  *       'enabled'  => bool,                   Per-site switch.
+ *       'path'     => string,                 Optional. Page URL path from struktur-situs.md, e.g. '/layanan/'.
  *       'required' => bool,                   Optional. true = cannot be disabled.
  *       'requires' => string[],               Optional. Module IDs that must also be enabled.
- *       'children' => array(                  Optional. Sub-modules; ignored when the parent is disabled.
- *           '<sub-id>' => array( 'label' => string, 'source' => string, 'enabled' => bool ),
+ *       'children' => array(                  Optional. Sub-modules; off when the parent is off.
+ *           '<sub-id>' => array( 'label' => string, 'source' => string, 'enabled' => bool, 'path' => string ),
  *       ),
  *   )
  *
@@ -33,6 +35,7 @@ return array(
 		'label'   => 'Wilayah dan geografi',
 		'group'   => 'inti',
 		'source'  => 'Ps 6 huruf a',
+		'path'    => '/profil/wilayah/',
 		'enabled' => true,
 	),
 
@@ -40,6 +43,7 @@ return array(
 		'label'    => 'Potensi sumber daya alam',
 		'group'    => 'inti',
 		'source'   => 'Ps 6 huruf b-k',
+		'path'     => '/profil/potensi-sda/',
 		'enabled'  => true,
 		'children' => array(
 			'pertanian'    => array( 'label' => 'Pertanian', 'source' => 'Ps 6 huruf b', 'enabled' => false ),
@@ -59,6 +63,7 @@ return array(
 		'label'    => 'Kependudukan',
 		'group'    => 'inti',
 		'source'   => 'Ps 7',
+		'path'     => '/data/kependudukan/',
 		'enabled'  => true,
 		'children' => array(
 			'jumlah'          => array( 'label' => 'Jumlah penduduk', 'source' => 'Ps 7 huruf a', 'enabled' => true ),
@@ -77,6 +82,7 @@ return array(
 		'label'    => 'Kelembagaan',
 		'group'    => 'inti',
 		'source'   => 'Ps 8',
+		'path'     => '/lembaga/',
 		'enabled'  => true,
 		'children' => array(
 			'pemerintahan'   => array( 'label' => 'Lembaga pemerintahan kelurahan', 'source' => 'Ps 8 huruf a', 'enabled' => true ),
@@ -95,6 +101,7 @@ return array(
 		'label'    => 'Prasarana dan sarana',
 		'group'    => 'inti',
 		'source'   => 'Ps 9',
+		'path'     => '/data/prasarana-sarana/',
 		'enabled'  => true,
 		'children' => array(
 			'transportasi'   => array( 'label' => 'Transportasi', 'source' => 'Ps 9 huruf a', 'enabled' => true ),
@@ -118,6 +125,7 @@ return array(
 		'label'    => 'Rekap data dasar keluarga',
 		'group'    => 'inti',
 		'source'   => 'Ps 3',
+		'path'     => '/data/keluarga/',
 		'enabled'  => false,
 		'children' => array(
 			'sdm'           => array( 'label' => 'Potensi SDM keluarga', 'source' => 'Ps 3 huruf a', 'enabled' => true ),
@@ -134,6 +142,7 @@ return array(
 		'label'    => 'Kualitas ibu dan anak (RIAD)',
 		'group'    => 'inti',
 		'source'   => 'Ps 1 angka 16, Ps 4, Ps 34 huruf a',
+		'path'     => '/data/ibu-anak/',
 		'enabled'  => false,
 		'requires' => array( 'data-keluarga' ),
 	),
@@ -142,6 +151,7 @@ return array(
 		'label'    => 'Tingkat potensi dan tipologi',
 		'group'    => 'inti',
 		'source'   => 'Ps 10-14, Ps 34 huruf b-d',
+		'path'     => '/perkembangan/potensi-tipologi/',
 		'enabled'  => true,
 		'children' => array(
 			'potensi-umum'         => array( 'label' => 'Tingkat potensi umum', 'source' => 'Ps 11-12', 'enabled' => true ),
@@ -154,6 +164,7 @@ return array(
 		'label'    => 'Tingkat perkembangan',
 		'group'    => 'inti',
 		'source'   => 'Ps 15-23, Ps 34 huruf e-g',
+		'path'     => '/perkembangan/tingkat/',
 		'enabled'  => true,
 		'children' => array(
 			'variabel'    => array( 'label' => 'Skor sembilan variabel', 'source' => 'Ps 15', 'enabled' => true ),
@@ -167,6 +178,7 @@ return array(
 		'label'   => 'Permasalahan dan indikasi program',
 		'group'   => 'inti',
 		'source'  => 'Ps 34 huruf h-i, Ps 42 huruf d',
+		'path'    => '/perkembangan/program/',
 		'enabled' => true,
 	),
 
@@ -174,6 +186,7 @@ return array(
 		'label'   => 'Dokumen profil',
 		'group'   => 'inti',
 		'source'  => 'Ps 35-37',
+		'path'    => '/publikasi/profil/',
 		'enabled' => true,
 	),
 
@@ -181,6 +194,7 @@ return array(
 		'label'   => 'Pokja profil kelurahan',
 		'group'   => 'inti',
 		'source'  => 'Ps 27',
+		'path'    => '/pemerintahan/pokja-profil/',
 		'enabled' => true,
 	),
 
@@ -188,6 +202,7 @@ return array(
 		'label'   => 'Jadwal pendataan',
 		'group'   => 'inti',
 		'source'  => 'Ps 39-40',
+		'path'    => '/publikasi/jadwal-pendataan/',
 		'enabled' => false,
 	),
 
@@ -197,6 +212,7 @@ return array(
 		'label'    => 'Beranda',
 		'group'    => 'pendukung',
 		'source'   => '',
+		'path'     => '/',
 		'enabled'  => true,
 		'required' => true,
 	),
@@ -207,8 +223,8 @@ return array(
 		'source'   => '',
 		'enabled'  => true,
 		'children' => array(
-			'sejarah'   => array( 'label' => 'Sejarah', 'source' => '', 'enabled' => true ),
-			'visi-misi' => array( 'label' => 'Visi dan misi', 'source' => '', 'enabled' => true ),
+			'sejarah'   => array( 'label' => 'Sejarah', 'source' => '', 'enabled' => true, 'path' => '/profil/sejarah/' ),
+			'visi-misi' => array( 'label' => 'Visi dan misi', 'source' => '', 'enabled' => true, 'path' => '/profil/visi-misi/' ),
 		),
 	),
 
@@ -216,6 +232,7 @@ return array(
 		'label'   => 'Berita dan pengumuman',
 		'group'   => 'pendukung',
 		'source'  => '',
+		'path'    => '/berita/',
 		'enabled' => true,
 	),
 
@@ -223,6 +240,7 @@ return array(
 		'label'   => 'Agenda kegiatan',
 		'group'   => 'pendukung',
 		'source'  => '',
+		'path'    => '/agenda/',
 		'enabled' => true,
 	),
 
@@ -230,6 +248,7 @@ return array(
 		'label'   => 'Galeri',
 		'group'   => 'pendukung',
 		'source'  => '',
+		'path'    => '/galeri/',
 		'enabled' => true,
 	),
 
@@ -237,6 +256,7 @@ return array(
 		'label'   => 'Layanan administrasi',
 		'group'   => 'pendukung',
 		'source'  => '',
+		'path'    => '/layanan/',
 		'enabled' => true,
 	),
 
@@ -244,6 +264,7 @@ return array(
 		'label'   => 'Informasi publik (PPID)',
 		'group'   => 'pendukung',
 		'source'  => 'UU 14/2008 (KIP)',
+		'path'    => '/ppid/',
 		'enabled' => true,
 	),
 
@@ -251,6 +272,7 @@ return array(
 		'label'   => 'Pengaduan masyarakat',
 		'group'   => 'pendukung',
 		'source'  => '',
+		'path'    => '/layanan/pengaduan/',
 		'enabled' => true,
 	),
 
@@ -258,6 +280,7 @@ return array(
 		'label'   => 'Produk hukum',
 		'group'   => 'pendukung',
 		'source'  => '',
+		'path'    => '/publikasi/produk-hukum/',
 		'enabled' => false,
 	),
 
@@ -265,6 +288,7 @@ return array(
 		'label'   => 'UMKM dan produk lokal',
 		'group'   => 'pendukung',
 		'source'  => '',
+		'path'    => '/umkm/',
 		'enabled' => false,
 	),
 
@@ -272,6 +296,7 @@ return array(
 		'label'    => 'Kontak dan lokasi',
 		'group'    => 'pendukung',
 		'source'   => '',
+		'path'     => '/kontak/',
 		'enabled'  => true,
 		'required' => true,
 	),

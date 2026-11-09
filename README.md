@@ -27,7 +27,7 @@ konfigurasi; tersedia juga *scaffolder*, pemeriksa otomatis, dan resep langkah d
 | Bagian | Status |
 |---|---|
 | Panduan domain dan katalog modul (`docs/guide/`) | Selesai |
-| Deklarasi modul (`theme/config/modules.php`) | Selesai sebagai spesifikasi; belum dibaca tema |
+| Deklarasi modul (`theme/config/modules.php`) dan sakelarnya di tema | Selesai: bagian yang ditandai ID modul tersembunyi bila modulnya nonaktif. Menu dan halaman otomatis belum |
 | Fondasi tema: *header*, *footer*, templat dasar, *scaffolder*, pemeriksa | Selesai |
 | Implementasi modul: CPT, *field*, templat, menu otomatis | Tahap berikutnya |
 

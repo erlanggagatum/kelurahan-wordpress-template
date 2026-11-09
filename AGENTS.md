@@ -13,7 +13,7 @@ is needed, plus tooling that lets an agent scaffold, run and verify changes with
 - **Domain guideline lives in `docs/guide/`** (Bahasa Indonesia): regulation summary, module catalog,
   proposed sitemap. Read `docs/guide/modul.md` before building any kelurahan feature.
 - Features are grouped into **modules** that each site can switch on/off. The declaration is
-  `theme/config/modules.php`. It is not wired into the theme yet, so treat it as the spec.
+  `theme/config/modules.php`, read by `theme/inc/modules.php` (see docs/recipes/use-modules.md).
 
 - WordPress runs from `.wp/` (git-ignored, created by `php bin/setup.php`).
 - `theme/` is linked into `.wp/wp-content/themes/kelurahan`. **Edit files in `theme/`, never in `.wp/`.**
@@ -39,6 +39,8 @@ is needed, plus tooling that lets an agent scaffold, run and verify changes with
 9. **Module-driven.** Every kelurahan feature belongs to a module ID from `docs/guide/modul.md` /
    `theme/config/modules.php`. Use that ID in file names, CPT/meta slugs where practical, and keep the doc,
    the config and the sitemap (`docs/guide/struktur-situs.md`) in sync when adding or renaming a module.
+   Gate output with `kelurahan_module_enabled()` / `kelurahan_module_url()` in PHP, or the class
+   `kelurahan-module-<id>` in block markup. Never hard-code a module page URL.
 10. **Personal data stays aggregate.** Data Dasar Keluarga and RIAD (mother & child) data are household-level
    personal data. Publish only aggregated numbers (per RW/lingkungan or whole kelurahan). Never store or
    render per-person or per-KK records (NIK, names, addresses) in the theme, seed data or fixtures.
@@ -68,6 +70,7 @@ theme/
 ├── functions.php            bootstrap: requires inc/*.php (add new inc files to its list)
 ├── inc/                     engine — rarely needs edits
 │   ├── helpers.php          config loader, label builders
+│   ├── modules.php          module switches: kelurahan_module_enabled(), _url(), block-class filter
 │   ├── post-types.php       registers config/post-types/*.php (+ auto rewrite flush)
 │   ├── taxonomies.php       registers config/taxonomies/*.php
 │   ├── meta.php             registers config/meta/*.php + generic admin meta box
@@ -77,7 +80,7 @@ theme/
 │   ├── assets.php           enqueue assets/css/main.css, assets/js/main.js
 │   └── template-tags.php    kelurahan_meta(), kelurahan_block_part(), kelurahan_pattern()
 ├── config/                  ← DECLARATIONS (most work happens here)
-│   ├── modules.php               kelurahan module on/off switches (spec only, not loaded yet)
+│   ├── modules.php               kelurahan module on/off switches + page paths
 │   ├── post-types/<slug>.php     return [ slug, singular, plural, args ]
 │   ├── taxonomies/<slug>.php     return [ slug, singular, plural, post_types, args ]
 │   └── meta/<post-type>.php      return [ post_type, title, fields => [ key => [label,type,...] ] ]
@@ -153,6 +156,7 @@ php tools/wp-cli.phar eval 'var_dump( wp_is_block_theme() );'
 | Custom block | docs/recipes/add-block.md |
 | Colors, fonts, spacing, CSS | docs/recipes/styling.md |
 | Pages, menus, content via CLI | docs/recipes/content-via-cli.md |
+| Show/hide by module, module links | docs/recipes/use-modules.md |
 
 ## Block markup rules (templates/, parts/, patterns/)
 
