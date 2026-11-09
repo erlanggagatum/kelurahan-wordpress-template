@@ -1,97 +1,101 @@
-# Usulan Struktur Situs & Menu
+# Usulan struktur situs dan menu
 
-Peta situs untuk situs profil kelurahan. Setiap halaman memetakan ke ID modul di [modul.md](modul.md).
-Bila modul nonaktif, halaman dan item menunya **tidak dibuat**. Bila semua anak sebuah menu induk
-nonaktif, menu induknya juga disembunyikan.
+Peta situs ini memetakan setiap halaman ke ID modul di [modul.md](modul.md). Halaman milik modul nonaktif
+tidak dibuat, dan item menunya tidak muncul. Menu induk ikut disembunyikan bila semua anaknya nonaktif.
 
-Slug URL memakai Bahasa Indonesia, huruf kecil, dan tanda hubung.
+Slug URL memakai bahasa Indonesia, huruf kecil, dan tanda hubung. Label menu memakai huruf kapital hanya di
+awal, kecuali nama diri dan singkatan.
 
 ## Menu utama
 
 ```
-Beranda                                   /                                  beranda
-Profil                                    /profil/                           (induk)
-├── Sejarah                               /profil/sejarah/                   tentang.sejarah
-├── Visi & Misi                           /profil/visi-misi/                 tentang.visi-misi
-├── Wilayah & Geografi                    /profil/wilayah/                   profil-wilayah
-└── Potensi Sumber Daya Alam              /profil/potensi-sda/               sda (+ sub-halaman per sda.*)
-Pemerintahan                              /pemerintahan/                     (induk)
-├── Struktur Organisasi                   /pemerintahan/struktur-organisasi/ kelembagaan.pemerintahan
-├── Lurah & Perangkat                     /pemerintahan/perangkat/           kelembagaan.pemerintahan
-└── Pokja Profil Kelurahan                /pemerintahan/pokja-profil/        pokja-profil
-Lembaga                                   /lembaga/                          kelembagaan (arsip CPT lembaga)
-├── Lembaga Kemasyarakatan (LPM, RT/RW, PKK, Karang Taruna)                  kelembagaan.kemasyarakatan
-├── Lembaga Ekonomi                                                          kelembagaan.ekonomi
-├── Lembaga Pendidikan                                                       kelembagaan.pendidikan
-├── Keamanan & Ketertiban                                                    kelembagaan.keamanan
-└── (Sosial, Profesi, Partai Politik, Adat: bila aktif)                      kelembagaan.*
-Data Kelurahan                            /data/                             (induk)
-├── Kependudukan                          /data/kependudukan/                kependudukan.*
-├── Prasarana & Sarana                    /data/prasarana-sarana/            prasarana-sarana.*
-├── Data Keluarga                         /data/keluarga/                    data-keluarga
-└── Ibu & Anak                            /data/ibu-anak/                    riad-ibu-anak
-Perkembangan                              /perkembangan/                     (induk)
-├── Potensi & Tipologi                    /perkembangan/potensi-tipologi/    analisis-potensi
-├── Tingkat Perkembangan                  /perkembangan/tingkat/             tingkat-perkembangan
-└── Permasalahan & Program                /perkembangan/program/             permasalahan-program
-Layanan                                   /layanan/                          (induk)
-├── Layanan Administrasi                  /layanan/                          layanan (arsip CPT layanan)
-├── Pengaduan                             /layanan/pengaduan/                pengaduan
-└── Informasi Publik (PPID)               /ppid/                             ppid
-Informasi                                 /informasi/                        (induk)
-├── Berita & Pengumuman                   /berita/                           berita
-├── Agenda                                /agenda/                           agenda
-├── Galeri                                /galeri/                           galeri
-└── UMKM & Produk Lokal                   /umkm/                             umkm
-Publikasi                                 /publikasi/                        (induk)
-├── Dokumen Profil Kelurahan              /publikasi/profil/                 dokumen-profil
-├── Produk Hukum                          /publikasi/produk-hukum/           produk-hukum
-└── Jadwal Pendataan                      /publikasi/jadwal-pendataan/       jadwal-pendataan
-Kontak                                    /kontak/                           kontak
+Label menu                       URL                                    Modul
+Beranda                          /                                      beranda
+Profil                           /profil/                               (induk)
+├── Sejarah                      /profil/sejarah/                       tentang.sejarah
+├── Visi dan misi                /profil/visi-misi/                     tentang.visi-misi
+├── Wilayah dan geografi         /profil/wilayah/                       profil-wilayah
+└── Potensi sumber daya alam     /profil/potensi-sda/                   sda (subhalaman per sda.*)
+Pemerintahan                     /pemerintahan/                         (induk)
+├── Struktur organisasi          /pemerintahan/struktur-organisasi/     kelembagaan.pemerintahan
+├── Lurah dan perangkat          /pemerintahan/perangkat/               kelembagaan.pemerintahan
+└── Pokja profil kelurahan       /pemerintahan/pokja-profil/            pokja-profil
+Lembaga                          /lembaga/                              kelembagaan (arsip CPT lembaga)
+├── Lembaga kemasyarakatan                                              kelembagaan.kemasyarakatan
+├── Lembaga ekonomi                                                     kelembagaan.ekonomi
+├── Lembaga pendidikan                                                  kelembagaan.pendidikan
+├── Keamanan dan ketertiban                                             kelembagaan.keamanan
+└── Sosial, profesi, partai politik, adat (bila aktif)                  kelembagaan.*
+Data kelurahan                   /data/                                 (induk)
+├── Kependudukan                 /data/kependudukan/                    kependudukan.*
+├── Prasarana dan sarana         /data/prasarana-sarana/                prasarana-sarana.*
+├── Data keluarga                /data/keluarga/                        data-keluarga
+└── Ibu dan anak                 /data/ibu-anak/                        riad-ibu-anak
+Perkembangan                     /perkembangan/                         (induk)
+├── Potensi dan tipologi         /perkembangan/potensi-tipologi/        analisis-potensi
+├── Tingkat perkembangan         /perkembangan/tingkat/                 tingkat-perkembangan
+└── Permasalahan dan program     /perkembangan/program/                 permasalahan-program
+Layanan                          /layanan/                              (induk)
+├── Layanan administrasi         /layanan/                              layanan (arsip CPT layanan)
+├── Pengaduan                    /layanan/pengaduan/                    pengaduan
+└── Informasi publik (PPID)      /ppid/                                 ppid
+Informasi                        /informasi/                            (induk)
+├── Berita dan pengumuman        /berita/                               berita
+├── Agenda                       /agenda/                               agenda
+├── Galeri                       /galeri/                               galeri
+└── UMKM dan produk lokal        /umkm/                                 umkm
+Publikasi                        /publikasi/                            (induk)
+├── Dokumen profil               /publikasi/profil/                     dokumen-profil
+├── Produk hukum                 /publikasi/produk-hukum/               produk-hukum
+└── Jadwal pendataan             /publikasi/jadwal-pendataan/           jadwal-pendataan
+Kontak                           /kontak/                               kontak
 ```
 
 Catatan desain menu:
-- Maksimal **7–8 item tingkat atas** agar tetap nyaman di ponsel. Bila modul pendukung banyak yang
-  nonaktif, `Informasi` dan `Publikasi` dapat digabung menjadi satu menu "Informasi".
-- "Profil" berisi gambaran alam dan identitas. "Data Kelurahan" berisi angka statistik (Ps 7, 9, 3–4).
-  "Perkembangan" berisi hasil analisis (Ps 10–23, 34).
 
-## Beranda (urutan blok yang diusulkan)
+- Batasi menu tingkat atas sampai tujuh atau delapan item agar tetap terbaca di ponsel. Bila banyak modul
+  pendukung yang nonaktif, gabungkan "Informasi" dan "Publikasi" menjadi satu menu "Informasi".
+- Pembagian isi: "Profil" memuat identitas dan kondisi alam; "Data kelurahan" memuat angka statistik
+  (Ps 3, 4, 7, dan 9); "Perkembangan" memuat hasil analisis (Ps 10 sampai 23 dan Ps 34).
+- Label menu sama persis dengan judul halaman tujuannya. Jangan memakai sinonim di tempat lain, misalnya
+  "Pemerintahan" di menu tetapi "Pemerintah kelurahan" di judul halaman.
+
+## Susunan beranda
 
 | Urutan | Blok | Modul |
 |---|---|---|
-| 1 | Hero: nama kelurahan, kecamatan, kab/kota, foto kantor/wilayah | `beranda` |
-| 2 | Sambutan Lurah | `beranda`, `kelembagaan.pemerintahan` |
-| 3 | Statistik singkat: penduduk, KK, luas, RW/RT | `kependudukan.jumlah`, `profil-wilayah` |
-| 4 | Status kelurahan: klasifikasi + kategori + tipologi (tahun data) | `tingkat-perkembangan`, `analisis-potensi` |
-| 5 | Layanan populer | `layanan` |
-| 6 | Berita & agenda terbaru | `berita`, `agenda` |
-| 7 | Unduh Profil Kelurahan tahun terbaru | `dokumen-profil` |
-| 8 | Peta & kontak singkat | `kontak` |
+| 1 | *Hero*: nama kelurahan, kecamatan, kabupaten/kota, foto kantor atau wilayah | `beranda` |
+| 2 | Sambutan lurah | `beranda`, `kelembagaan.pemerintahan` |
+| 3 | Statistik singkat: jumlah penduduk, KK, luas wilayah, jumlah RW dan RT | `kependudukan.jumlah`, `profil-wilayah` |
+| 4 | Status kelurahan: klasifikasi, kategori, dan tipologi, beserta tahun datanya | `tingkat-perkembangan`, `analisis-potensi` |
+| 5 | Layanan yang sering dicari | `layanan` |
+| 6 | Berita dan agenda terbaru | `berita`, `agenda` |
+| 7 | Tombol "Unduh profil kelurahan [tahun]" | `dokumen-profil` |
+| 8 | Peta dan kontak singkat | `kontak` |
 
-Blok yang modulnya nonaktif tidak dirender.
+Blok milik modul nonaktif tidak ditampilkan.
 
-## Footer
+## *Footer*
 
-- Kolom 1: identitas kelurahan, alamat, telepon, email, jam layanan (`kontak`)
-- Kolom 2: tautan cepat: Layanan, Pengaduan, PPID, Dokumen Profil
-- Kolom 3: tautan instansi: kecamatan, pemerintah kab/kota, SP4N-LAPOR!
-- Baris bawah: "Data profil disusun berdasarkan Permendagri No. 12 Tahun 2007 · Tahun data: ____"
+- Kolom 1: nama kelurahan, alamat, telepon, email, dan jam layanan (`kontak`).
+- Kolom 2: tautan cepat ke Layanan administrasi, Pengaduan, Informasi publik (PPID), dan Dokumen profil.
+- Kolom 3: tautan ke situs kecamatan, pemerintah kabupaten/kota, dan SP4N-LAPOR!
+- Baris bawah: "Data profil disusun berdasarkan Permendagri Nomor 12 Tahun 2007. Tahun data: ____."
 
-## Pemetaan ke jenis konten (usulan)
+## Jenis konten per halaman (usulan)
 
-| Jenis | Dipakai oleh |
+| Jenis konten | Dipakai oleh |
 |---|---|
-| Page | profil-wilayah, sda, kependudukan, prasarana-sarana, data-keluarga, riad-ibu-anak, analisis-potensi, tingkat-perkembangan, pokja-profil, jadwal-pendataan, tentang, pengaduan, ppid, kontak |
-| Post (bawaan) | berita |
+| Halaman | profil-wilayah, sda, kependudukan, prasarana-sarana, data-keluarga, riad-ibu-anak, analisis-potensi, tingkat-perkembangan, pokja-profil, jadwal-pendataan, tentang, pengaduan, ppid, kontak |
+| Pos bawaan WordPress | berita |
 | CPT `data_profil` | angka tahunan untuk semua modul data inti |
-| CPT `lembaga` + tax `jenis_lembaga` | kelembagaan.* (kecuali pemerintahan) |
+| CPT `lembaga` dan taksonomi `jenis_lembaga` | kelembagaan.* (kecuali pemerintahan) |
 | CPT `perangkat` | kelembagaan.pemerintahan, pokja-profil |
-| CPT `dokumen` + tax `jenis_dokumen` | dokumen-profil, produk-hukum, ppid |
-| CPT `program` + tax `bidang` | permasalahan-program |
+| CPT `dokumen` dan taksonomi `jenis_dokumen` | dokumen-profil, produk-hukum, ppid |
+| CPT `program` dan taksonomi `bidang` | permasalahan-program |
 | CPT `layanan` | layanan |
 | CPT `agenda` | agenda, jadwal-pendataan |
-| CPT `galeri`, `umkm`, `lokasi`/`fasilitas` | galeri, umkm, sda.wisata, sda.ruang-publik, prasarana-sarana |
+| CPT `galeri`, `umkm`, `lokasi` atau `fasilitas` | galeri, umkm, sda.wisata, sda.ruang-publik, prasarana-sarana |
 
-Semua nama CPT dan taksonomi di atas masih **usulan**. Finalisasi dilakukan saat implementasi
-mengikuti `docs/recipes/add-post-type.md`.
+Nama CPT dan taksonomi di atas masih usulan dan akan difinalkan saat implementasi, mengikuti
+`docs/recipes/add-post-type.md`.

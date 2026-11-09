@@ -1,46 +1,49 @@
-# Template WordPress Profil Kelurahan
+# Templat WordPress profil kelurahan
 
-Template situs web **profil kelurahan** di Indonesia, disusun mengikuti **Permendagri No. 12 Tahun 2007**
-tentang Pedoman Penyusunan dan Pendayagunaan Data Profil Desa dan Kelurahan. Pasal 37 Permen tersebut menyebut
-website sebagai media publikasi data profil.
+Templat situs web profil kelurahan yang disusun mengikuti Permendagri Nomor 12 Tahun 2007 tentang Pedoman
+Penyusunan dan Pendayagunaan Data Profil Desa dan Kelurahan. Pasal 37 peraturan itu menyebut situs web
+sebagai salah satu media publikasi data profil.
 
-Isi situs dibagi menjadi **modul** yang bisa dipilih per kelurahan. Modul **inti** berasal dari Permen:
-wilayah, SDA, kependudukan, kelembagaan, prasarana, tingkat perkembangan, dan lain-lain. Modul **pendukung**
-bukan dari Permen: berita, layanan, PPID, pengaduan, dan lain-lain.
+Isi situs dibagi menjadi modul yang bisa dipilih untuk setiap kelurahan. Modul inti diturunkan dari Permen,
+misalnya wilayah, sumber daya alam, kependudukan, kelembagaan, prasarana, dan tingkat perkembangan. Modul
+pendukung, seperti berita, layanan, PPID, dan pengaduan, tidak berasal dari Permen.
 
-Secara teknis, ini adalah tema WordPress hibrida (block theme + template PHP), dibangun agar mudah dikembangkan
-oleh AI coding agent: post type, taksonomi, dan custom field berbasis konfigurasi, scaffolder, pemeriksa
-otomatis, dan resep langkah demi langkah.
+Secara teknis, repositori ini berisi tema WordPress hibrida (tema blok dan templat PHP) yang dirancang untuk
+dikembangkan oleh AI *coding agent*. Post type, taksonomi, dan *custom field* dideklarasikan lewat berkas
+konfigurasi; tersedia juga *scaffolder*, pemeriksa otomatis, dan resep langkah demi langkah.
 
-| Untuk | Baca |
+| Kebutuhan | Dokumen |
 |---|---|
-| Isi & struktur situs (spesifikasi domain) | [docs/guide/](docs/guide/) |
-| Katalog modul + checklist per situs | [docs/guide/modul.md](docs/guide/modul.md) |
-| Usulan peta situs & menu | [docs/guide/struktur-situs.md](docs/guide/struktur-situs.md) |
+| Isi dan struktur situs | [docs/guide/](docs/guide/) |
+| Katalog modul dan daftar periksa per situs | [docs/guide/modul.md](docs/guide/modul.md) |
+| Usulan peta situs dan menu | [docs/guide/struktur-situs.md](docs/guide/struktur-situs.md) |
 | Ringkasan Permendagri 12/2007 | [docs/guide/ringkasan-permen-12-2007.md](docs/guide/ringkasan-permen-12-2007.md) |
-| AI agent (Claude Code, Codex, Cursor, …) | [AGENTS.md](AGENTS.md) (Claude Code memuatnya lewat [CLAUDE.md](CLAUDE.md)) |
-| Cara template WordPress di-resolve | [docs/architecture.md](docs/architecture.md) |
+| Panduan untuk AI agent (Claude Code, Codex, Cursor, dan lainnya) | [AGENTS.md](AGENTS.md); Claude Code membacanya lewat [CLAUDE.md](CLAUDE.md) |
+| Cara WordPress memilih templat | [docs/architecture.md](docs/architecture.md) |
 | Resep tugas teknis | [docs/recipes/](docs/recipes/) |
 
-## Status
+## Status pengerjaan
 
 | Bagian | Status |
 |---|---|
-| Panduan domain & katalog modul | ✅ selesai (`docs/guide/`) |
-| Deklarasi modul (`theme/config/modules.php`) | ✅ spesifikasi; belum dibaca tema |
-| Fondasi tema (header, footer, template dasar, scaffolder, pemeriksa) | ✅ |
-| Implementasi modul (CPT, field, template, menu otomatis) | ⏳ berikutnya |
+| Panduan domain dan katalog modul (`docs/guide/`) | Selesai |
+| Deklarasi modul (`theme/config/modules.php`) | Selesai sebagai spesifikasi; belum dibaca tema |
+| Fondasi tema: *header*, *footer*, templat dasar, *scaffolder*, pemeriksa | Selesai |
+| Implementasi modul: CPT, *field*, templat, menu otomatis | Tahap berikutnya |
 
-## Kebutuhan
+## Kebutuhan sistem
 
-- PHP 8.1+ dengan `mysqli`, `curl`, `gd`, `mbstring`, `openssl`, `zip`
-- MySQL 8 / MariaDB lokal
-- Node/npm (opsional, hanya untuk pintasan `npm run`)
-- Tanpa XAMPP/htdocs dan tanpa Docker. WordPress berjalan dari `.wp/` di dalam repo, dilayani server bawaan PHP.
+- PHP 8.1 atau lebih baru dengan ekstensi `mysqli`, `curl`, `gd`, `mbstring`, `openssl`, dan `zip`
+- MySQL 8 atau MariaDB di komputer lokal
+- Node dan npm (opsional, hanya untuk pintasan `npm run`)
 
-## Instalasi lokal
+XAMPP dan Docker tidak diperlukan. WordPress berjalan dari folder `.wp/` di dalam repositori dan dilayani
+server bawaan PHP.
 
-**1. Buat database dan user** (sekali). Dari shell root MySQL (`mysql -u root -p` atau MySQL Workbench):
+## Pemasangan lokal
+
+**1. Buat database dan pengguna** (cukup sekali). Buka *shell* MySQL sebagai root (`mysql -u root -p` atau
+MySQL Workbench), lalu jalankan:
 
 ```sql
 CREATE DATABASE wp_agent CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -49,77 +52,82 @@ GRANT ALL PRIVILEGES ON wp_agent.* TO 'wp_agent'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-**2. Konfigurasi:**
+**2. Atur konfigurasi:**
 
 ```bash
-cp .env.example .env      # lalu isi DB_PASSWORD (dan nilai lain bila perlu)
+cp .env.example .env      # lalu isi DB_PASSWORD dan nilai lain yang perlu
 ```
 
-**3. Pasang.** Perintah ini mengunduh WP-CLI (diverifikasi sha512) dan WordPress core, menulis wp-config,
-memasang situs, menautkan tema, dan mengisi konten contoh:
+**3. Pasang WordPress.** Perintah ini mengunduh WP-CLI (diverifikasi dengan sha512) dan WordPress, menulis
+`wp-config.php`, memasang situs, menautkan tema, lalu mengisi konten contoh:
 
 ```bash
-npm run setup             # = php bin/setup.php --seed
+npm run setup             # sama dengan php bin/setup.php --seed
 ```
 
-**4. Jalankan** (host/port dari `WP_URL` di `.env`):
+**4. Jalankan server** (host dan port diambil dari `WP_URL` di `.env`):
 
 ```bash
 npm start                 # http://localhost:8080   admin: http://localhost:8080/wp-admin
 ```
 
-Setup aman dijalankan ulang. Langkah yang sudah selesai dilewati.
+Perintah pemasangan aman dijalankan ulang; langkah yang sudah selesai akan dilewati.
 
 ## Membuat situs untuk satu kelurahan
 
-Repo ini adalah **template**. Setiap kelurahan memakai salinannya sendiri, dengan database dan `.env` sendiri.
+Repositori ini adalah templat. Setiap kelurahan memakai salinannya sendiri, lengkap dengan database dan `.env` sendiri.
 
 ```bash
-git clone <repo-ini> kelurahan-contoh && cd kelurahan-contoh   # atau GitHub "Use this template"
-rm -rf .git && git init                                        # riwayat baru untuk situs ini
-cp .env.example .env                                           # DB_NAME, password, WP_TITLE, port WP_URL baru
+git clone <repo-ini> kelurahan-contoh && cd kelurahan-contoh   # atau tombol "Use this template" di GitHub
+rm -rf .git && git init                                        # riwayat git baru untuk situs ini
+cp .env.example .env                                           # isi DB_NAME, kata sandi, WP_TITLE, dan port WP_URL
 ```
 
-1. **Pilih modul.** Salin checklist di akhir [docs/guide/modul.md](docs/guide/modul.md), isi bersama pihak
-   kelurahan, lalu set `enabled` di `theme/config/modules.php`.
-2. **Pasang:** `npm run setup`, lalu `npm start`.
-3. **Isi data** dari dokumen profil kelurahan yang sudah disahkan Keputusan Lurah. Sertakan tahun data.
+1. Pilih modul. Salin daftar periksa di akhir [docs/guide/modul.md](docs/guide/modul.md), isi bersama pihak
+   kelurahan, lalu atur nilai `enabled` di `theme/config/modules.php`.
+2. Pasang dan jalankan: `npm run setup`, lalu `npm start`.
+3. Isi data dari dokumen profil kelurahan yang sudah disahkan dengan keputusan lurah, beserta tahun datanya.
 
-Buat database situs terlebih dahulu (SQL seperti di atas, dengan nama DB baru). Set `WP_URL` **sebelum**
-setup. Mengubahnya setelah itu memerlukan `wp search-replace`, dan `npm start` mencetak perintah yang tepat.
+Buat database situs lebih dulu dengan SQL di atas, memakai nama database baru. Atur `WP_URL` sebelum
+pemasangan. Jika diubah sesudahnya, Anda perlu menjalankan `wp search-replace`; perintah lengkapnya dicetak
+oleh `npm start`.
 
-Tema sudah bernama `kelurahan` (prefix PHP `kelurahan_`). `bin/rename.php` **tidak** perlu dijalankan lagi.
-Perbaikan umum yang dibuat saat membangun satu situs sebaiknya dikembalikan ke template ini.
+Tema sudah bernama `kelurahan` dengan prefiks PHP `kelurahan_`, jadi `bin/rename.php` tidak perlu dijalankan
+lagi. Perbaikan umum yang muncul saat membangun satu situs sebaiknya dibawa kembali ke templat ini.
 
-## Perintah harian
+## Perintah sehari-hari
 
 | Perintah | Fungsi |
 |---|---|
-| `npm start` | server dev pada host/port `WP_URL` dari `.env` |
-| `npm run make` | bantuan scaffolder (`php bin/make.php <cmd>`) |
-| `npm run check` | pemeriksaan statis: lint PHP, JSON, markup blok, bentuk config, privasi |
-| `npm run check:http` | statis + runtime + ambil setiap URL penting (server harus jalan) |
-| `npm run wp -- <args>` | WP-CLI, mis. `npm run wp -- post list` |
-| `npm run seed` | (ulang) buat konten contoh |
-| `composer install && composer lint` | WordPress Coding Standards (PHPCS) |
+| `npm start` | Menjalankan server pengembangan di host dan port `WP_URL` |
+| `npm run make` | Menampilkan bantuan *scaffolder* (`php bin/make.php <cmd>`) |
+| `npm run check` | Pemeriksaan statis: sintaksis PHP, JSON, markah blok, bentuk konfigurasi, privasi |
+| `npm run check:http` | Pemeriksaan statis ditambah pemeriksaan WordPress dan setiap URL penting (server harus berjalan) |
+| `npm run wp -- <args>` | Menjalankan WP-CLI, misalnya `npm run wp -- post list` |
+| `npm run seed` | Membuat ulang konten contoh |
+| `composer install && composer lint` | Memeriksa kode dengan WordPress Coding Standards (PHPCS) |
 
-## Prinsip penting
+## Aturan penting
 
-- **Data pribadi hanya agregat.** Data dasar keluarga dan data ibu & anak (RIAD) ditampilkan sebagai rekap.
-  Tidak ada NIK, nama, atau alamat warga di situs (UU 27/2022 PDP). Lihat [modul.md](docs/guide/modul.md#aturan-lintas-modul).
-- **Situs menampilkan hasil, tanpa menghitung skor.** Indikator penilaian ada di Lampiran Permen yang tidak tersedia.
-  Situs menyimpan skor dan kategori yang disahkan Lurah.
-- **Repo publik.** Tidak boleh ada path absolut, nama pribadi, email asli, atau rahasia. Ini diperiksa
-  otomatis oleh `php bin/check.php` (lihat [AGENTS.md](AGENTS.md)).
+- **Data pribadi hanya tampil sebagai rekap.** Data dasar keluarga dan data ibu dan anak (RIAD) ditampilkan
+  dalam angka gabungan. NIK, nama, dan alamat warga tidak ada di situs (UU Nomor 27 Tahun 2022 tentang
+  Pelindungan Data Pribadi). Rinciannya ada di [modul.md](docs/guide/modul.md#aturan-yang-berlaku-untuk-semua-modul).
+- **Situs menampilkan hasil penilaian, tidak menghitungnya.** Indikator penilaian ada di lampiran Permen yang
+  tidak tersedia, jadi situs menyimpan skor dan kategori yang sudah disahkan lurah.
+- **Repositori ini publik.** Path absolut, nama orang, email asli, dan data rahasia tidak boleh masuk.
+  `php bin/check.php` memeriksanya secara otomatis (lihat [AGENTS.md](AGENTS.md)).
 
-## Alternatif server lokal
+## Cara lain menjalankan secara lokal
 
-- **wp-env (Docker):** `npm run env:start`. Memakai `.wp-env.json` dan container DB sendiri, bukan MySQL Anda.
-- **WordPress yang sudah ada** (XAMPP, LocalWP…): salin atau symlink `theme/` ke `wp-content/themes/kelurahan`, lalu aktifkan.
+- wp-env (Docker): jalankan `npm run env:start`. Cara ini memakai `.wp-env.json` dan *container* database
+  sendiri, bukan MySQL di komputer Anda.
+- WordPress yang sudah terpasang (XAMPP, LocalWP, dan sejenisnya): salin atau buat *symlink* folder `theme/`
+  ke `wp-content/themes/kelurahan`, lalu aktifkan temanya.
 
-## Ke produksi
+## Memasang di server produksi
 
-Deploy folder `theme/` sebagai `wp-content/themes/kelurahan`. Bagian lain repo tidak dibutuhkan saat runtime.
+Unggah folder `theme/` sebagai `wp-content/themes/kelurahan`. Bagian lain repositori tidak dibutuhkan saat
+situs berjalan.
 
 ## Lisensi
 
