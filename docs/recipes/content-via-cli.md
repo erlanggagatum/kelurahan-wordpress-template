@@ -24,10 +24,13 @@ wp option update page_for_posts <blog-id>
 
 ## Meta and terms
 
+The CPT and taxonomy below (`lembaga`, `jenis_lembaga`, field `tahun_berdiri`) are proposals from
+docs/guide/modul.md. They work once the module is implemented; swap in whatever slugs exist.
+
 ```bash
-wp post meta update <id> event_date 2026-12-01
-wp term create event_type "Webinar"
-wp post term set <id> event_type webinar
+wp post meta update <id> tahun_berdiri 1998
+wp term create jenis_lembaga "Lembaga kemasyarakatan"
+wp post term set <id> jenis_lembaga lembaga-kemasyarakatan
 ```
 
 ## Classic menus (for PHP templates / wp_nav_menu)
@@ -35,7 +38,7 @@ wp post term set <id> event_type webinar
 ```bash
 wp menu create "Primary"
 wp menu item add-post primary <page-id>
-wp menu item add-custom primary "Events" /events/
+wp menu item add-custom primary "Layanan" /layanan/
 wp menu location assign primary primary
 ```
 

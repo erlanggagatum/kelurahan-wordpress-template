@@ -52,8 +52,8 @@ function kelurahan_load_configs( string $dir ): array {
 /**
  * Build a full post type labels array from singular/plural names.
  *
- * @param string $singular e.g. "Event".
- * @param string $plural   e.g. "Events".
+ * @param string $singular e.g. "Lembaga".
+ * @param string $plural   e.g. "Lembaga" (Indonesian plural is often the same word).
  * @return array<string, string>
  */
 function kelurahan_post_type_labels( string $singular, string $plural ): array {
@@ -101,8 +101,8 @@ function kelurahan_post_type_labels( string $singular, string $plural ): array {
 /**
  * Build a taxonomy labels array from singular/plural names.
  *
- * @param string $singular e.g. "Event Type".
- * @param string $plural   e.g. "Event Types".
+ * @param string $singular e.g. "Jenis Lembaga".
+ * @param string $plural   e.g. "Jenis Lembaga".
  * @return array<string, string>
  */
 function kelurahan_taxonomy_labels( string $singular, string $plural ): array {

@@ -19,6 +19,6 @@ defined( 'ABSPATH' ) || exit;
 </head>
 <body <?php body_class( 'kelurahan-php-template' ); ?>>
 <?php wp_body_open(); ?>
-<a class="skip-link screen-reader-text" href="#main"><?php esc_html_e( 'Skip to content', 'kelurahan' ); ?></a>
+<a class="skip-link screen-reader-text" href="#main"><?php esc_html_e( 'Langsung ke konten', 'kelurahan' ); ?></a>
 <div class="wp-site-blocks">
 <?php kelurahan_block_part( 'header', 'header' ); ?>

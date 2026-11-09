@@ -9,7 +9,7 @@ Create `theme/<hierarchy-slug>.php`, for example `theme/single-book.php` or `the
 **The PHP file only takes effect if no block template exists with the same slug or a more specific one.**
 If `templates/single-book.html` exists, the block template wins, so delete it. See docs/architecture.md.
 
-Skeleton (copy from `theme/taxonomy-event_type.php`):
+Skeleton:
 
 ```php
 <?php

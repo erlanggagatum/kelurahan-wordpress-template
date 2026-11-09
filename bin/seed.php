@@ -28,40 +28,48 @@ function kelurahan_seed_post( array $postarr ): int {
 	return $id;
 }
 
-// Pages.
+// Pages. Slugs follow docs/guide/struktur-situs.md so pattern links (/profil/, /layanan/) resolve.
 $kelurahan_home_content = "<!-- wp:pattern {\"slug\":\"kelurahan/hero\"} /-->\n\n<!-- wp:pattern {\"slug\":\"kelurahan/call-to-action\"} /-->";
 
 $home = kelurahan_seed_post(
 	array(
 		'post_type'     => 'page',
-		'post_name'     => 'home',
-		'post_title'    => 'Home',
+		'post_name'     => 'beranda',
+		'post_title'    => 'Beranda',
 		'post_content'  => $kelurahan_home_content,
 		'page_template' => 'page-no-title',
 	)
 );
 kelurahan_seed_post(
 	array(
-		'post_type'     => 'page',
-		'post_name'     => 'landing',
-		'post_title'    => 'Landing (PHP template)',
-		'post_content'  => "<!-- wp:paragraph -->\n<p>This page uses page-templates/template-landing.php.</p>\n<!-- /wp:paragraph -->",
-		'page_template' => 'page-templates/template-landing.php',
+		'post_type'    => 'page',
+		'post_name'    => 'profil',
+		'post_title'   => 'Profil',
+		'post_content' => "<!-- wp:paragraph -->\n<p>Halaman induk profil kelurahan: sejarah, visi dan misi, wilayah, dan potensi sumber daya alam.</p>\n<!-- /wp:paragraph -->",
 	)
 );
 kelurahan_seed_post(
 	array(
 		'post_type'    => 'page',
-		'post_name'    => 'about',
-		'post_title'   => 'About',
-		'post_content' => "<!-- wp:paragraph -->\n<p>About this site.</p>\n<!-- /wp:paragraph -->",
+		'post_name'    => 'layanan',
+		'post_title'   => 'Layanan',
+		'post_content' => "<!-- wp:paragraph -->\n<p>Daftar layanan administrasi, persyaratan, dan jam layanan kantor kelurahan.</p>\n<!-- /wp:paragraph -->",
+	)
+);
+kelurahan_seed_post(
+	array(
+		'post_type'     => 'page',
+		'post_name'     => 'landing',
+		'post_title'    => 'Contoh templat PHP',
+		'post_content'  => "<!-- wp:paragraph -->\n<p>Halaman ini memakai page-templates/template-landing.php.</p>\n<!-- /wp:paragraph -->",
+		'page_template' => 'page-templates/template-landing.php',
 	)
 );
 $blog = kelurahan_seed_post(
 	array(
 		'post_type'  => 'page',
-		'post_name'  => 'blog',
-		'post_title' => 'Blog',
+		'post_name'  => 'berita',
+		'post_title' => 'Berita dan pengumuman',
 	)
 );
 
@@ -69,13 +77,13 @@ update_option( 'show_on_front', 'page' );
 update_option( 'page_on_front', $home );
 update_option( 'page_for_posts', $blog );
 
-// Blog post.
+// News post.
 kelurahan_seed_post(
 	array(
 		'post_type'    => 'post',
-		'post_name'    => 'hello-agents',
-		'post_title'   => 'Hello, agents',
-		'post_content' => "<!-- wp:paragraph -->\n<p>First post.</p>\n<!-- /wp:paragraph -->",
+		'post_name'    => 'selamat-datang',
+		'post_title'   => 'Selamat datang di situs profil kelurahan',
+		'post_content' => "<!-- wp:paragraph -->\n<p>Contoh berita pertama. Ganti atau hapus setelah situs diisi.</p>\n<!-- /wp:paragraph -->",
 	)
 );
 

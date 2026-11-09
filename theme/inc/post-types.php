@@ -5,9 +5,9 @@
  * Config shape (all keys except slug/singular/plural optional):
  *
  *   return array(
- *       'slug'     => 'event',       // Max 20 chars, lowercase, no spaces.
- *       'singular' => 'Event',
- *       'plural'   => 'Events',
+ *       'slug'     => 'lembaga',     // Max 20 chars, lowercase, no spaces.
+ *       'singular' => 'Lembaga',
+ *       'plural'   => 'Lembaga',
  *       'args'     => array(...),    // Merged over defaults, passed to register_post_type().
  *   );
  *

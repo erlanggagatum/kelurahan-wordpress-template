@@ -88,7 +88,6 @@ theme/
 ├── header.php / footer.php  shared chrome for PHP templates (renders parts/header.html)
 ├── page-templates/*.php     user-selectable PHP page templates ("Template Name:")
 ├── template-parts/*.php     PHP partials for get_template_part()
-├── taxonomy-event_type.php  example PHP override in the template hierarchy
 └── assets/css|js            plain CSS/JS, no build
 bin/
 ├── setup.php          one-time local install (idempotent)       npm run setup
@@ -132,8 +131,8 @@ Useful WP-CLI for verifying work:
 
 ```bash
 php tools/wp-cli.phar post-type list --_builtin=0
-php tools/wp-cli.phar post create --post_type=event --post_title="Test" --post_status=publish --porcelain
-php tools/wp-cli.phar post meta update <id> event_date 2026-12-01
+php tools/wp-cli.phar post create --post_type=page --post_title="Uji" --post_status=publish --porcelain
+php tools/wp-cli.phar post meta update <id> <meta_key> <value>
 php tools/wp-cli.phar post update <id> --page_template=page-templates/template-landing.php
 php tools/wp-cli.phar rewrite flush
 php tools/wp-cli.phar eval 'var_dump( wp_is_block_theme() );'

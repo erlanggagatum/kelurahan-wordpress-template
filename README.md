@@ -46,9 +46,9 @@ server bawaan PHP.
 MySQL Workbench), lalu jalankan:
 
 ```sql
-CREATE DATABASE wp_agent CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'wp_agent'@'localhost' IDENTIFIED BY 'choose-a-password';
-GRANT ALL PRIVILEGES ON wp_agent.* TO 'wp_agent'@'localhost';
+CREATE DATABASE wp_kelurahan CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'wp_kelurahan'@'localhost' IDENTIFIED BY 'choose-a-password';
+GRANT ALL PRIVILEGES ON wp_kelurahan.* TO 'wp_kelurahan'@'localhost';
 FLUSH PRIVILEGES;
 ```
 

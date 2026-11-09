@@ -20,7 +20,7 @@ This creates `theme/config/taxonomies/<slug>.php`. Edit `args` with any `registe
 ## Custom term archive
 
 - Block: `php bin/make.php template taxonomy-genre`
-- PHP: create `theme/taxonomy-genre.php`. Copy `theme/taxonomy-event_type.php`.
+- PHP: create `theme/taxonomy-genre.php` from the skeleton in docs/recipes/add-php-template.md.
 
 ## Verify
 

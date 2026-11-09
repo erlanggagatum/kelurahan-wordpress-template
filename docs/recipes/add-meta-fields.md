@@ -33,7 +33,7 @@ Every field gets `show_in_rest`, a sanitize callback by type, and an `edit_post`
 
 For a button link use `{"metadata":{"bindings":{"url":{"source":"core/post-meta","args":{"key":"book_url"}}}}}`. For an image, bind `url`.
 Bindings print the raw value. If the value needs formatting (dates, labels for select values), use a PHP template or a custom block.
-Example: `theme/templates/single-event.html`.
+Put the bound blocks in `theme/templates/single-book.html` (the post-type scaffolder creates it; otherwise run `php bin/make.php template single-book`).
 
 **PHP:**
 

@@ -6,13 +6,13 @@
  * Config shape:
  *
  *   return array(
- *       'post_type' => 'event',             // Or array( 'event', 'post' ).
- *       'title'     => 'Event Details',     // Meta box title.
+ *       'post_type' => 'lembaga',           // Or array( 'lembaga', 'post' ).
+ *       'title'     => 'Detail lembaga',    // Meta box title.
  *       'context'   => 'side',              // Optional: normal|side|advanced. Default normal.
  *       'fields'    => array(
- *           'event_date' => array(
- *               'label'       => 'Date',
- *               'type'        => 'date',     // See KELURAHAN_FIELD_TYPES.
+ *           'tahun_berdiri' => array(
+ *               'label'       => 'Tahun berdiri',
+ *               'type'        => 'number',   // See KELURAHAN_FIELD_TYPES.
  *               'default'     => '',
  *               'description' => 'Shown under the input.',
  *               'options'     => array(),    // select only: value => label.
@@ -23,7 +23,7 @@
  * Every field is registered with show_in_rest, so it is:
  *   - readable/writable via REST (`meta` key on the post),
  *   - bindable in block templates with the core/post-meta Block Bindings source,
- *   - readable in PHP with kelurahan_meta( 'event_date' ).
+ *   - readable in PHP with kelurahan_meta( 'tahun_berdiri' ).
  *
  * Meta keys must NOT start with "_" (protected keys cannot be block-bound).
  *

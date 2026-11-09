@@ -15,11 +15,11 @@ PHP templates still work alongside.
 
 ## Template resolution (the important rule)
 
-For each request WordPress builds a candidate list from the template hierarchy, e.g. for an
-`event_type` term `workshop`:
+For each request WordPress builds a candidate list from the template hierarchy, e.g. for a
+`jenis_lembaga` term `lpm` (taxonomy proposed in docs/guide/modul.md):
 
 ```
-taxonomy-event_type-workshop → taxonomy-event_type → taxonomy → archive → index
+taxonomy-jenis_lembaga-lpm → taxonomy-jenis_lembaga → taxonomy → archive → index
 ```
 
 1. It finds the first existing **PHP** file in that list (`locate_template`).
@@ -29,8 +29,8 @@ taxonomy-event_type-workshop → taxonomy-event_type → taxonomy → archive �
 
 So:
 
-- `taxonomy-event_type.php` + `archive.html` → **PHP wins** (more specific).
-- `taxonomy-event_type.php` + `taxonomy-event_type.html` → **block wins** (equal).
+- `taxonomy-jenis_lembaga.php` + `archive.html` → **PHP wins** (more specific).
+- `taxonomy-jenis_lembaga.php` + `taxonomy-jenis_lembaga.html` → **block wins** (equal).
 - No PHP file → normal block template resolution.
 
 Templates edited in the Site Editor are stored in the DB (`wp_template` posts) and override the
@@ -70,11 +70,11 @@ Edit the header once in `parts/header.html`.
 Moving post types and fields into a plugin later means moving `config/` and the matching `inc/` files.
 The format stays the same.
 
-## Data access cheat-sheet (hypothetical `event` CPT with an `event_date` field)
+## Data access cheat-sheet (proposed `data_profil` CPT with a `tahun_data` field)
 
 | Where | How |
 |---|---|
-| PHP | `kelurahan_meta( 'event_date' )` |
-| Block template | `<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"core/post-meta","args":{"key":"event_date"}}}}} --><p></p><!-- /wp:paragraph -->` |
-| REST | `GET /wp-json/wp/v2/event/<id>` → `meta.event_date` |
-| WP-CLI | `wp post meta get <id> event_date` |
+| PHP | `kelurahan_meta( 'tahun_data' )` |
+| Block template | `<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"core/post-meta","args":{"key":"tahun_data"}}}}} --><p></p><!-- /wp:paragraph -->` |
+| REST | `GET /wp-json/wp/v2/data_profil/<id>` → `meta.tahun_data` |
+| WP-CLI | `wp post meta get <id> tahun_data` |

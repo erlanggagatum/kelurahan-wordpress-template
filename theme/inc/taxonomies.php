@@ -5,10 +5,10 @@
  * Config shape:
  *
  *   return array(
- *       'slug'        => 'event_type',  // Max 32 chars.
- *       'singular'    => 'Event Type',
- *       'plural'      => 'Event Types',
- *       'post_types'  => array( 'event' ),
+ *       'slug'        => 'jenis_lembaga', // Max 32 chars.
+ *       'singular'    => 'Jenis lembaga',
+ *       'plural'      => 'Jenis lembaga',
+ *       'post_types'  => array( 'lembaga' ),
  *       'args'        => array(...),    // Merged over defaults, passed to register_taxonomy().
  *   );
  *
